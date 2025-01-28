@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 import { Employee } from './employee.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  private apiUrl = "https://miniature-meme-559467jvrr7f4w77-3000.app.github.dev/employees/"; // take from json url
+  private apiUrl = "https://glowing-disco-xx496g7rv47265gp-3000.app.github.dev/employees/"; // take from json url
 
   constructor(private http: HttpClient) { } //  http used for calling backend request like get,post,put delete request
 
@@ -19,7 +20,7 @@ export class EmployeeService {
   }
 
   //Return employee by id
-  getEmployee(id:number): Observable<Employee>{
+  getEmployee(id:any): Observable<Employee>{
     return this.http.get<Employee>(`${this.apiUrl}${id}`);
   }
 

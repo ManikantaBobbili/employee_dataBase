@@ -1,65 +1,61 @@
-<form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+<div>
+  <h1 style="color:blueviolet">Add Employee</h1>
+  <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
     <div>
-      <label for="id">ID:</label>
-      <input id="id" formControlName="id" type="number">
-      <div *ngIf="employeeForm.get('id')?.touched && employeeForm.get('id')?.invalid">
-        <small *ngIf="employeeForm.get('id')?.errors?.required">ID is required.</small>
+      <label for="name">Name: </label><br/>
+      <input type="text" name="name" formControlName="name" placeholder="Enter the Name">
+      <div *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched">
+        <div *ngIf="employeeForm.get('name')?.errors?.['required']">Name is required.</div>
+        <div *ngIf="employeeForm.get('name')?.errors?.['minlength']">Minimum length is 4 .</div>
       </div>
+      <br>
     </div>
-    
-    <div>
-      <label for="name">Name:</label>
-      <input id="name" formControlName="name" type="text">
-      <div *ngIf="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid">
-        <small *ngIf="employeeForm.get('name')?.errors?.required">Name is required.</small>
-      </div>
-    </div>
+
+    <br>
     
     <div>
-      <label for="department">Department:</label>
-      <input id="department" formControlName="department" type="text">
-      <div *ngIf="employeeForm.get('department')?.touched && employeeForm.get('department')?.invalid">
-        <small *ngIf="employeeForm.get('department')?.errors?.required">Department is required.</small>
+      <label for="department">Department: </label><br/>
+      <input type="text" name="department" formControlName="department" placeholder="Enter the Department">
+      <div *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
+        <div *ngIf="employeeForm.get('department')?.errors?.['required']">Department is required.</div>
       </div>
+      
     </div>
-    
+
+    <br>
     <div>
-      <label for="role">Role:</label>
-      <input id="role" formControlName="role" type="text">
-      <div *ngIf="employeeForm.get('role')?.touched && employeeForm.get('role')?.invalid">
-        <small *ngIf="employeeForm.get('role')?.errors?.required">Role is required.</small>
+      <label for="role">Role: </label><br/>
+      <input type="text" name="role" formControlName="role" placeholder="Enter the Role">
+      <div *ngIf="employeeForm.get('role')?.invalid && employeeForm.get('role')?.touched">
+        <div *ngIf="employeeForm.get('role')?.errors?.['required']">Role is required.</div>
       </div>
     </div>
-    
+
+    <br>
     <div>
-      <label for="salary">Salary:</label>
-      <input id="salary" formControlName="salary" type="number">
-      <div *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid">
-        <small *ngIf="employeeForm.get('salary')?.errors?.required">Salary is required.</small>
-        <small *ngIf="employeeForm.get('salary')?.errors?.min">Salary must be a non-negative number.</small>
+      <label for="salary">Salary: </label><br/>
+      <input type="text" name="salary" formControlName="salary" placeholder="Enter the Salary">
+      <div *ngIf="employeeForm.get('salary')?.invalid && employeeForm.get('salary')?.touched">
+        <div *ngIf="employeeForm.get('salary')?.errors?.['required']">Salary is required.</div>
       </div>
     </div>
-    
-    <div>
-      <label for="date">Date of Joining:</label>
-      <input id="date" formControlName="date" type="date">
-      <div *ngIf="employeeForm.get('date')?.touched && employeeForm.get('date')?.invalid">
-        <small *ngIf="employeeForm.get('date')?.errors?.required">Date of Joining is required.</small>
-      </div>
-    </div>
-    
-    <div formArrayName="projects">
-      <label>Projects:</label>
-      <button type="button" (click)="addProject()">Add Project</button>
-      <div *ngFor="let project of projects.controls; let i = index">
-        <input [formControlName]="i" placeholder="Project Name">
-        <div *ngIf="projects.at(i).invalid && projects.at(i).touched">
-          <small *ngIf="projects.at(i).errors?.required">Project Name is required.</small>
-        </div>
-        <button type="button" (click)="removeProject(i)">Remove</button>
-      </div>
-    </div>
-    
-    <button type="submit" [disabled]="employeeForm.invalid">Add Employee</button>
-  </form>
   
+  
+    <br>
+    <div>
+      <label for="date">Date: </label><br/>
+      <input type="text" name="date" formControlName="date" placeholder="Enter the Date">
+      <div *ngIf="employeeForm.get('date')?.invalid && employeeForm.get('date')?.touched">
+        <div *ngIf="employeeForm.get('date')?.errors?.['required']">Date is required.</div>
+      </div>
+    </div>
+
+    <br>
+    
+    <div>
+      <button type="submit" [disabled]="employeeForm.invalid" >
+        Add Employee
+      </button>
+    </div>
+  </form>
+</div>

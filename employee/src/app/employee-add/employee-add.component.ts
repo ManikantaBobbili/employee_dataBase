@@ -14,35 +14,14 @@ export class EmployeeAddComponent {
               private router:Router,
               private fb:FormBuilder){
                 this.employeeForm = this.fb.group({
-                  "name":["",Validators.required],
-                  "department":["",Validators.required],
-                  "role":["",Validators.required],
-                  "salary":["",Validators.required],
-                  "date":["",Validators.required],
-                  "projects":this.fb.array([this.createProject()])
+                  name:["",[Validators.required,Validators.minLength(4)]],
+                  department:["",Validators.required],
+                  role:["",Validators.required],
+                  salary:["",Validators.required],
+                  date:["",Validators.required]
+                  
                 })
               }
-  createProject(): FormControl {
-    return this.fb.control('', Validators.required);
-  }
-
-  get projects(): FormArray {
-    return this.employeeForm.get('projects') as FormArray;
-  }
-
-  addProject(): void {
-    this.projects.push(this.createProject());
-  }
-
-  removeProject(index: number): void {
-    this.projects.removeAt(index);
-  }
-
-  setProjects(projects: string[]): void {
-    this.projects.clear();
-    projects.forEach(project => this.projects.push(this.fb.control(project)));
-  }
-
   addEmployee():void{
     if(this.employeeForm.valid){
       this.employeeService.createEmployee(this.employeeForm.value).subscribe(() =>

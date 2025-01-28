@@ -11,7 +11,7 @@ import { Employee } from '../employee.model';
 })
 export class EmployeeEditComponent implements OnInit {
   employeeForm: FormGroup;
-  empId!: number;
+  empId!: any;
 
   constructor(
     private employeeService: EmployeeService,
@@ -25,41 +25,17 @@ export class EmployeeEditComponent implements OnInit {
       department: ['', Validators.required],
       role: ['', Validators.required],
       salary: [null, [Validators.required, Validators.min(0)]],
-      date_of_joining: ['', Validators.required],
-      projects: this.fb.array([this.createProject()])
+      date: ['', Validators.required]
+      
     });
   }
 
   ngOnInit(): void {
-    this.empId = +this.route.snapshot.paramMap.get('id')!;
-    // this.getEmployee(this.empId);
+    this.empId = this.route.snapshot.paramMap.get('id')!;
       this.employeeService.getEmployee(this.empId).subscribe((employee: Employee) => {
         this.employeeForm.patchValue(employee);
       });
   }
-
-  createProject(): FormControl {
-    return this.fb.control('', Validators.required);
-  }
-
-  get projects(): FormArray {
-    return this.employeeForm.get('projects') as FormArray;
-  }
-
-  addProject(): void {
-    this.projects.push(this.createProject());
-  }
-
-  removeProject(index: number): void {
-    this.projects.removeAt(index);
-  }
-
-  setProjects(projects: string[]): void {
-    this.projects.clear();
-    projects.forEach(project => this.projects.push(this.fb.control(project, Validators.required)));
-  }
-
-  
 
   editEmployee(): void {
     if (this.employeeForm.valid) {

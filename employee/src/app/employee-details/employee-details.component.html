@@ -6,15 +6,8 @@
     <p><strong>Role:</strong> {{ employee.role }}</p>
     <p><strong>Salary:</strong> {{ employee.salary }}</p>
     <p><strong>Date of Joining:</strong> {{ employee.date }}</p>
-    <h3>Projects</h3>
-    <ul>
-      <li *ngFor="let project of employee.projects">{{ project }}</li>
-    </ul>
+
   
     <button (click)="homePage()">Back to Home</button>
-  </div>
-  
-  <div *ngIf="!employee">
-    <p>Loading employee details...</p>
   </div>
   

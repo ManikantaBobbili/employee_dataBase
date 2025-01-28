@@ -1,1 +1,53 @@
-<p>employee-list works!</p>
+<div class="container">
+  <h2>Employee List</h2>
+  
+  <button routerLink="/add">Add New Employee</button><br><br>
+
+  <div class="search-section">
+    <input [(ngModel)]="searchText" type="text" class="form-control" placeholder="Search by name, department, or role" (input)="filterEmployees()"/>
+  </div>
+<br>
+<br>
+  <!-- Sorting Section -->
+  <div class="sorting-section">
+    <label for="sortBy">Sort by:</label>
+    <select id="sortBy" [(ngModel)]="sortBy" (change)="sortEmployees()">
+      <option value="name">Name</option>
+      <option value="department">Department</option>
+      <option value="role">Role</option>
+    </select>
+    <button (click)="toggleOrder()">
+      Sort {{ isAscending ? 'Ascending' : 'Descending' }}
+    </button>
+  </div>
+  <br>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th style="color:blue">ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Role</th>
+        <th>Salary</th>
+        <th>Date of Joining</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of filteredEmployees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.department }}</td>
+        <td>{{ employee.role }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>{{ employee.date}}</td>
+        <td>
+          <button (click)="viewEmployee(employee.id)">View</button>
+          <button (click)="editEmployee(employee.id)">Edit</button>
+          <button (click)="deleteEmployee(employee.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
